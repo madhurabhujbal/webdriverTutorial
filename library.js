@@ -8,12 +8,13 @@ async function findElementOnWebsite() {
   await driver.findElement(By.css("input")).then((el) => {
     console.log("found input box", el);
   });
-  await driver.findElement(By.css(".btn-primary")).then((el) => {
-    console.log("found button element", el);
-  });
-  await driver.findElements(By.css("nav li")).then((array) => {
-    console.log("found the navbar elements", array);
-  });
+  await driver
+    .findElement(By.css(".btn-primary"))
+    .getText()
+    .then((el) => {
+      console.log("found button element with text : ", el);
+    });
+  await driver.findElements(By.css("nav li"));
 
   (await driver).sleep(1000);
   driver.quit();
