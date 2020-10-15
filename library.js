@@ -5,3 +5,7 @@ var webdriver = require("selenium-webdriver"),
 var driver = new webdriver.Builder().forBrowser("chrome").build();
 
 driver.get("https://library-app.firebaseapp.com");
+
+driver.findElements(By.css("input"));
+
+driver.quit();
