@@ -7,7 +7,9 @@ async function findElementOnWebsite() {
   await driver.get("https://library-app.firebaseapp.com");
   await driver.findElements(By.css("input"));
   await driver.findElements(By.css(".btn-primary"));
-  //driver.quit();
+
+  (await driver).sleep(1000);
+  driver.quit();
 }
 
 findElementOnWebsite();
