@@ -2,6 +2,14 @@ var webdriver = require("selenium-webdriver"),
   By = webdriver.By,
   until = webdriver.until;
 
-var driver = new webdriver.Builder().forBrowser("chrome").build();
+async function findElementOnWebsite() {
+  var driver = new webdriver.Builder().forBrowser("chrome").build();
+  await driver.get("https://library-app.firebaseapp.com");
+  await driver.findElement(By.css("input"));
+  await driver.findElement(By.css(".btn-primary"));
 
-driver.get("https://library-app.firebaseapp.com");
+  (await driver).sleep(1000);
+  driver.quit();
+}
+
+findElementOnWebsite();
