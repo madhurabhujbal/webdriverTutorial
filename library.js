@@ -1,6 +1,6 @@
 var webdriver = require("selenium-webdriver"),
-  By = webdriver.By,
-  until = webdriver.until;
+By = webdriver.By,
+until = webdriver.until;
 
 async function findElementOnWebsite() {
   var driver = new webdriver.Builder().forBrowser("chrome").build();
@@ -8,15 +8,20 @@ async function findElementOnWebsite() {
   await driver.findElement(By.css("input")).then((el) => {
     console.log("found input box", el);
   });
-  await driver.findElement(By.css(".btn-primary")).then((el) => {
-    console.log("found button element", el);
-  });
-  await driver.findElements(By.css("nav li")).then((array) => {
-    console.log("found the navbar elements", array);
-  });
+  await driver
+    .findElement(By.css(".btn-primary"))
+    .getText()
+    .then((el) => {
+      console.log("found button element with text : ", el);
+    });
 
-  (await driver).sleep(1000);
-  driver.quit();
+  let elements = await driver.findElements(By.css("nav li"));
+  for( let e of elements) {
+    let text = await e.getText();
+    console.log("Navbar element text : " + text);
+  }
+  // (await driver).sleep(1000);
+  driver.close();
 }
 
 findElementOnWebsite();
