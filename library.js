@@ -6,10 +6,13 @@ async function findElementOnWebsite() {
   var driver = new webdriver.Builder().forBrowser("chrome").build();
   await driver.get("https://library-app.firebaseapp.com");
 
-  (await driver).findElement(By.css('input')).sendKeys('username@user.com');
-  (await driver).sleep(10000);
-  (await driver).findElement(By.css(".btn-primary")).click();
+   let inputElement = (await driver).findElement(By.css('input'));
+   await inputElement.sendKeys('username@user.com');
+    (await driver).sleep(1000);
 
+   let requestButton = (await driver).findElement(By.css(".btn-primary"));
+   await requestButton.click();
+   
   // await driver.findElement(By.css("input")).then((el) => {
   //   console.log("found input box", el);
   // });
@@ -26,7 +29,7 @@ async function findElementOnWebsite() {
   //   console.log("Navbar element text : " + text);
   // }
   // (await driver).sleep(1000);
-  //driver.close();
+  driver.close();
 }
 
 findElementOnWebsite();
