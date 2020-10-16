@@ -12,6 +12,7 @@ async function findElementOnWebsite() {
 
    let requestButton = (await driver).findElement(By.css(".btn-primary"));
    await requestButton.click();
+   await driver.sleep(2000);
 
    let alertText = (await driver).findElement(By.css(".alert-success"));
     await alertText.getText().then((text) => {
