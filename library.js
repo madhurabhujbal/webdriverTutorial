@@ -13,6 +13,11 @@ async function findElementOnWebsite() {
    let requestButton = (await driver).findElement(By.css(".btn-primary"));
    await requestButton.click();
 
+   let alertText = (await driver).findElement(By.css(".alert-success"));
+    await alertText.getText().then((text) => {
+     console.log("alert text is : ", text);
+   });
+
   driver.close();
 }
 
