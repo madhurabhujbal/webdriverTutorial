@@ -9,11 +9,9 @@ async function findElementOnWebsite() {
 
    let inputElement = (await driver).findElement(By.css('input'));
    await inputElement.sendKeys('username@user.com');
-    (await driver).sleep(5000);
 
    let requestButton = (await driver).findElement(By.css(".btn-primary"));
    await requestButton.click();
-   await driver.sleep(2000);
 
    let alertTextPromise =  (await driver).findElement(By.css(".alert-success"));
    let alertText = await alertTextPromise.getText();
