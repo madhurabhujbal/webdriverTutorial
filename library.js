@@ -14,11 +14,7 @@ async function findElementOnWebsite() {
    await requestButton.click();
 
    let alertText = (await (await driver.wait(until.elementLocated(By.css('.alert-success')),4000)).getText());
-   console.log("alert text is : ", alertText);;
-
-  //  let alertTextPromise =  (await driver).findElement(By.css(".alert-success"));
-  //  let alertText = await alertTextPromise.getText();
-  //  console.log("alert text is : ", alertText);
+   console.log("alert text is : ", alertText);
 
   driver.close();
 }
