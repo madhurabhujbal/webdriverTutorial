@@ -8,7 +8,7 @@ async function findElementOnWebsite() {
   // implicit wait : (await driver).manage().setTimeouts({ implicit:5000 });
 
    let inputElement = (await driver).findElement(By.css('input'));
-   await inputElement.sendKeys('us');
+   await inputElement.sendKeys('us@h.com');
 
    let requestButton = (await driver).findElement(By.css(".btn-primary"));
     (await driver.wait(async () => {
