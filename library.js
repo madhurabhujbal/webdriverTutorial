@@ -12,8 +12,10 @@ async function findElementOnWebsite() {
 
    let requestButton = (await driver).findElement(By.css(".btn-primary"));
     (await driver.wait(() => {
-       return requestButton.isEnabled();
-     }, 10000));
+       return requestButton.getCssValue('opacity').then((result) => {
+         return result == 1;
+       });
+     }, 15000));
    await requestButton.click();
 
    let alertText = (await (await driver.wait(until.elementLocated(By.css('.alert-success')),4000)).getText());
