@@ -11,10 +11,9 @@ async function findElementOnWebsite() {
    await inputElement.sendKeys('us');
 
    let requestButton = (await driver).findElement(By.css(".btn-primary"));
-    (await driver.wait(() => {
-       return requestButton.getCssValue('opacity').then((result) => {
-         return result == 1;
-       });
+    (await driver.wait(async () => {
+       const result = await requestButton.getCssValue('opacity');
+      return result == 1;
      }, 15000));
    await requestButton.click();
 
