@@ -23,7 +23,7 @@ describe("library app scenarios", function() {
 
    let requestButton = (await driver).findElement(By.css(".btn-primary"));
        const result = await requestButton.getCssValue('opacity');
-        assert(result === '1');
+        assert.equal(result, '1');
   });
 
   it('Gives alert message on button clicked', async function() {
@@ -35,13 +35,14 @@ describe("library app scenarios", function() {
    let alertText = (await (await driver.wait(until.elementLocated(By.css('.alert-success')),4000)).getText());
    console.log("alert text is : ", alertText);
    driver.findElements(By.css('.alert-success')).then(function(result) {
-     assert.equal(result.length, 1, console.log( result.length + " alert success were found"));
+     assert.equal(result.length, 1);
    });
   });
 
   it('Display navbar elements', async function() {
-    await driver.findElement(By.css('nav')).getText().then((text) => {
-      console.log(text);
+    await driver.findElements(By.css('nav')).then((result) => {
+     assert.equal(result.length, 1);
+     console.log(result);
     });
   });
 
