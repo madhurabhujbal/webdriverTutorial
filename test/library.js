@@ -27,7 +27,7 @@ describe("library app scenarios", function() {
      }, 15000));
   });
 
-  it('doesnt work with mocha', async function() {
+  it('Gives alert message on button clicked', async function() {
     let inputElement = (await driver).findElement(By.css('input'));
    await inputElement.sendKeys('us.com');
 
@@ -37,7 +37,7 @@ describe("library app scenarios", function() {
    console.log("alert text is : ", alertText);
   });
 
-  it('works with mocha', async function() {
+  it('Display navbar elements', async function() {
     await driver.findElement(By.css('nav')).getText().then((text) => {
       console.log(text);
     });
