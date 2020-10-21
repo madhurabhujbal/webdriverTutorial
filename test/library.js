@@ -29,7 +29,7 @@ describe("library app scenarios", function() {
 
   it('Gives alert message on button clicked', async function() {
     let inputElement = (await driver).findElement(By.css('input'));
-   await inputElement.sendKeys('us.com');
+   await inputElement.sendKeys('user@username.com');
 
    let requestButton = (await driver).findElement(By.css(".btn-primary"));
     await requestButton.click();
