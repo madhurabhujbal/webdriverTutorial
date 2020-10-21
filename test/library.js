@@ -1,6 +1,7 @@
 var webdriver = require("selenium-webdriver")
 var { describe, it, after, before } = require("mocha");
 By = webdriver.By,
+assert = require('assert'),
 until = webdriver.until;
 var driver;
 
@@ -18,13 +19,15 @@ describe("library app scenarios", function() {
 
   it('Changes the button opacity on valid email in input field', async function() {
     let inputElement = (await driver).findElement(By.css('input'));
-   await inputElement.sendKeys('us@h.com');
+   await inputElement.sendKeys('user@username.com');
 
    let requestButton = (await driver).findElement(By.css(".btn-primary"));
     (await driver.wait(async () => {
        const result = await requestButton.getCssValue('opacity');
-      return result == 1;
-     }, 15000));
+       return assert(result === '1');
+      // return result == 1;
+     }
+     , 5000));
   });
 
   it('Gives alert message on button clicked', async function() {
