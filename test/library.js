@@ -22,12 +22,8 @@ describe("library app scenarios", function() {
    await inputElement.sendKeys('user@username.com');
 
    let requestButton = (await driver).findElement(By.css(".btn-primary"));
-    // (await driver.wait(async () => {
        const result = await requestButton.getCssValue('opacity');
         assert(result === '1');
-      // return result == 1;
-    //  }
-    //  , 5000));
   });
 
   it('Gives alert message on button clicked', async function() {
