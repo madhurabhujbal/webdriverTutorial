@@ -35,7 +35,7 @@ describe("library app scenarios", function() {
    let alertText = (await (await driver.wait(until.elementLocated(By.css('.alert-success')),4000)).getText());
    console.log("alert text is : ", alertText);
    driver.findElements(By.css('.alert-success')).then(function(result) {
-     assert(result.length === 1, console.log( result.length + "alert success were found"));
+     assert.equal(result.length, 1, console.log( result.length + " alert success were found"));
    });
   });
 
