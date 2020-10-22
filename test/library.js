@@ -1,13 +1,8 @@
-var webdriver = require("selenium-webdriver")
-By = webdriver.By,
-until = webdriver.until;
-chrome = require('selenium-webdriver/chrome');
-var { describe, it, after, before } = require("mocha");
-// assert = require('assert');
-var opt = new chrome.Options();
- opt.addArguments('disable-infobars');
+var webdriver = require("selenium-webdriver"),
+  { describe, it, after, before } = require("mocha");
 var driver;
 var find;
+// assert = require('assert');
 
 describe("library app scenarios", function() {
   this.timeout(7000);
