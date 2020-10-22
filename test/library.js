@@ -1,8 +1,3 @@
-var webdriver = require("selenium-webdriver")
-var { describe, it, after, before } = require("mocha");
-By = webdriver.By,
-assert = require('assert'),
-until = webdriver.until;
 var driver;
 
 describe("library app scenarios", function() {
