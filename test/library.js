@@ -1,7 +1,7 @@
 var webdriver = require("selenium-webdriver"),
   { describe, it, after, before } = require("mocha");
-  By = webdriver.By,
-until = webdriver.until;
+//   By = webdriver.By,
+// until = webdriver.until;
 var Page = require('../lib/base_page');
 var page;
 
