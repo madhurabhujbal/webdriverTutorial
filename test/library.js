@@ -2,6 +2,10 @@ var webdriver = require("selenium-webdriver"),
   { describe, it, after, before } = require("mocha");
 //   By = webdriver.By,
 // until = webdriver.until;
+var chai = require('chai');
+var chaiAsPromised = require('chai-as-promised');
+var should = chai.should();
+chai.use(chaiAsPromised);
 var Page = require('../lib/home_page');
 var page;
 
@@ -19,7 +23,8 @@ describe("library app scenarios", function() {
   });
 
   it('Typing valid email changes button opacity to 1', async function() {
-    await page.requestButton();
+    var button = await page.requestButton();
+    button.opacity.should.eventually.equal('1');
   //   let inputElement = (await page.driver).findElement(By.css('input'));
   //  await inputElement.sendKeys('user@username.com');
 
@@ -32,7 +37,8 @@ describe("library app scenarios", function() {
   });
 
   it('Typing a valid email enables request button', async function() {
-    await page.requestButton();
+    var enableButton = await page.requestButton();
+    await enableButton.state.should.eventually.be.true;
   //   let inputElement = (await page.driver).findElement(By.css('input'));
   //  await inputElement.sendKeys('user@username.com');
 
@@ -43,7 +49,8 @@ describe("library app scenarios", function() {
   });
 
   it('Clicking Request invitation triggers confirmation box', async function() {
-    await page.alertSuccess();
+    var alertMsg = page.alertSuccess();
+    await alertMsg.should.eventually.contain("Thank you!");
   //   await page.driver.findElements(By.css('nav')).then((result) => {
   //    console.log(result);
   //   });
