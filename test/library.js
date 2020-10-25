@@ -1,49 +1,36 @@
-var webdriver = require("selenium-webdriver")
-var { describe, it, after, before } = require("mocha");
-By = webdriver.By,
-assert = require('assert'),
-until = webdriver.until;
-var driver;
+var webdriver = require("selenium-webdriver"),
+  { describe, it, after, before } = require("mocha");
+var chai = require('chai');
+var chaiAsPromised = require('chai-as-promised');
+var should = chai.should();
+chai.use(chaiAsPromised);
+var Page = require('../lib/home_page');
+var page;
 
 describe("library app scenarios", function() {
-  this.timeout(7000);
-  beforeEach(async function() {
-    driver = new webdriver.Builder().forBrowser("chrome").build();
-   await driver.get("https://library-app.firebaseapp.com");
+  this.timeout(9000);
 
+  beforeEach(async function() {
+    page = new Page();
+   await page.visit("https://library-app.firebaseapp.com");
   });
 
   afterEach(function() {
-    driver.close();
+    page.close();
   });
 
-  it('Changes the button opacity on valid email in input field', async function() {
-    let inputElement = (await driver).findElement(By.css('input'));
-   await inputElement.sendKeys('user@username.com');
-
-   let requestButton = (await driver).findElement(By.css(".btn-primary"));
-       const result = await requestButton.getCssValue('opacity');
-        assert.equal(result, '1');
+  it('Typing valid email changes button opacity to 1', async function() {
+    var button = await page.requestButton();
+    button.opacity.should.eventually.equal('1');
   });
 
-  it('Gives alert message on button clicked', async function() {
-    let inputElement = (await driver).findElement(By.css('input'));
-   await inputElement.sendKeys('user@username.com');
+  it('Typing a valid email enables request button', async function() {
+    var enableButton = await page.requestButton();
+    await enableButton.state.should.eventually.be.true;
+  });
 
-   let requestButton = (await driver).findElement(By.css(".btn-primary"));
-    await requestButton.click();
-   let alertText = (await (await driver.wait(until.elementLocated(By.css('.alert-success')),4000)).getText());
-   console.log("alert text is : ", alertText);
-   driver.findElements(By.css('.alert-success')).then(function(result) {
-     assert.equal(result.length, 1);
+  it('Clicking Request invitation triggers confirmation box', async function() {
+    var alertMsg = page.alertSuccess();
+    await alertMsg.should.eventually.contain("Thank you!");
    });
-  });
-
-  it('Display navbar elements', async function() {
-    await driver.findElements(By.css('nav')).then((result) => {
-     assert.equal(result.length, 1);
-     console.log(result);
-    });
-  });
-
 });
