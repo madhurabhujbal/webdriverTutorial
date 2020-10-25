@@ -10,27 +10,30 @@ var page;
 describe("library app scenarios", function() {
   this.timeout(9000);
 
-  beforeEach(async function() {
+  beforeEach(function(done) {
     page = new Page();
-   await page.visit("https://library-app.firebaseapp.com");
+    page.visit("https://library-app.firebaseapp.com");
+    done();
   });
 
-  afterEach(function() {
+  afterEach(function(done) {
     page.close();
+    done();
   });
 
-  it('Typing valid email changes button opacity to 1', async function() {
-    var button = await page.requestButton();
-    button.opacity.should.eventually.equal('1');
-  });
+  // it('Typing valid email changes button opacity to 1', function(done) {
+  //   var button = page.requestButton();
+  //   button.opacity.should.eventually.equal('1').then(()=>done());
+  // });
 
-  it('Typing a valid email enables request button', async function() {
-    var enableButton = await page.requestButton();
-    await enableButton.state.should.eventually.be.true;
-  });
+  // it('Typing a valid email enables request button', function(done) {
+  //   var enableButton = page.requestButton();
+  //  enableButton.state.should.eventually.be.true.then(()=>done());
+  // });
 
-  it('Clicking Request invitation triggers confirmation box', async function() {
-    var alertMsg = page.alertSuccess();
-    await alertMsg.should.eventually.contain("Thank you!");
+  it('Clicking Request invitation triggers confirmation box', function(done) {
+    page.alertSuccess( function verifyResult(alertMsg) {
+          alertMsg.should.eventually.contain("Thank you!").then(()=>done())
+        });
    });
 });
