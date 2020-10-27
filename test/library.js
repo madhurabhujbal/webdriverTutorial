@@ -1,5 +1,9 @@
 var webdriver = require("selenium-webdriver"),
   { describe, it, after, before } = require("mocha");
+var chai = require('chai');
+var chaiAsPromised = require('chai-as-promised');
+var should = chai.should();
+chai.use(chaiAsPromised);
 var Page = require('../lib/home_page');
 var page;
 
@@ -17,15 +21,19 @@ describe("library app scenarios", function() {
     done();
   });
 
-  it('Typing valid email changes button opacity to 1', async function() {
-    await page.requestButton();
-  });
+  // it('Typing valid email changes button opacity to 1', function(done) {
+  //   var button = page.requestButton();
+  //   button.opacity.should.eventually.equal('1').then(()=>done());
+  // });
 
-  it('Typing a valid email enables request button', async function() {
-    await page.requestButton();
-  });
+  // it('Typing a valid email enables request button', function(done) {
+  //   var enableButton = page.requestButton();
+  //  enableButton.state.should.eventually.be.true.then(()=>done());
+  // });
 
-  it('Clicking Request invitation triggers confirmation box', async function() {
-    await page.alertSuccess();
+  it('Clicking Request invitation triggers confirmation box', function(done) {
+    page.alertSuccess( function verifyResult(alertMsg) {
+          alertMsg.should.eventually.contain("Thank you!").then(()=>done())
+        });
    });
 });
